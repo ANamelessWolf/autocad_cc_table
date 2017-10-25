@@ -12,6 +12,9 @@ namespace Nameless.Flareon.Runtime
     /// </summary>
     public class Commands : NamelessObject
     {
-
+        /// <summary>
+        /// The application
+        /// </summary>
+        public static AppSettings App;
     }
 }

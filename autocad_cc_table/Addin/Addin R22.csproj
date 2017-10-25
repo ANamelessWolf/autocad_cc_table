@@ -76,6 +76,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Controller\FormatUtils.cs" />
+    <Compile Include="Controller\GeometryUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -89,7 +91,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Runtime\AppSettings.cs" />
     <Compile Include="Runtime\Commands.cs" />
+    <Compile Include="Runtime\AutoCADCCApplication.cs" />
     <Compile Include="Yggdrasil\NamelessObject.cs" />
     <EmbeddedResource Include="Assets\Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
