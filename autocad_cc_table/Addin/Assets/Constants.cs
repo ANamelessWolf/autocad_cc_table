@@ -44,8 +44,18 @@ namespace Nameless.Flareon.Assets
         /// </summary>
         public const String ATT_NUM_DEC = "NumberOfDecimals";
         /// <summary>
+        /// The attribute name for the azimut format
+        /// </summary>
+        public const String ATT_AZI_FORMAT = "AzimutFormat";
+        /// <summary>
         /// The Default number of decimals
         /// </summary>
         public const int DFTL_NUM_DEC = 2;
+        /*********************************
+        ******* Formatos de Texto ********
+        **********************************/
+        public const String FORMAT_SEXAG_FULL = "{0}°{1}'{2:0.00}''";
+        public const String FORMAT_SEXAG_SEC = "{0}°{1}'{2}''";
+        public const String FORMAT_SEXAG_MIN = "{0}°{1}'";
     }
 }

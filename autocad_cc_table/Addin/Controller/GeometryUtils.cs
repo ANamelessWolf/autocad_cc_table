@@ -53,16 +53,72 @@ namespace Nameless.Flareon.Controller
             return direction == Clockwise.Clockwise;
         }
         /// <summary>
-        /// Gets the vertices.
+        /// Fix a polyline
+        /// </summary>
+        /// <param name="polyline">The polyline to fix.</param>
+        /// <returns>The fixed polyline</returns>
+        public static Polyline Fix(this Polyline polyline)
+        {
+            Polyline pl = new Polyline();
+            List<Point2d> vertices = new List<Point2d>();
+            Point2d v;
+            double b;
+            Boolean isClockwise = polyline.IsClockwise();
+            for (int i = 0; i < polyline.NumberOfVertices; i++)
+            {
+                v = polyline.GetPoint2dAt(i);
+                b = polyline.GetBulgeAt(i);
+                if (vertices.Count(pt => pt.X == v.X && pt.Y == v.Y) == 0)
+                {
+                    if (isClockwise)
+                        pl.AddVertexAt(i, v, b, 0, 0);
+                    else
+                        pl.AddVertexAt(0, v, b, 0, 0);
+                    vertices.Add(v);
+                }
+            }
+            pl.Closed = true;
+            return pl;
+        }
+        /// <summary>
+        /// Gets the vertices without repetitions
         /// </summary>
         /// <param name="polyline">The polyline.</param>
         /// <returns>The polyline vertices</returns>
         public static Point3dCollection GetVertices(this Polyline polyline)
         {
             Point3dCollection vertexColl = new Point3dCollection();
+            Point3d v;
             for (int i = 0; i < polyline.NumberOfVertices; i++)
-                vertexColl.Add(polyline.GetPoint3dAt(i));
+            {
+                v = polyline.GetPoint3dAt(i);
+                if (vertexColl.OfType<Point3d>().Count(pt => pt.X == v.X && pt.Y == v.Y) == 0)
+                    vertexColl.Add(v);
+            }
             return vertexColl;
+        }
+        /// <summary>
+        /// Gets the polyline vertices in order.
+        /// </summary>
+        /// <param name="pl">The polyline.</param>
+        /// <param name="startIndex">The start index of the polyline.</param>
+        /// <returns>The index in which the points are procesed</returns>
+        public static int[] GetVerticesInOrder(this Polyline pl, int startIndex)
+        {
+            int[] plIndexes = new int[pl.NumberOfVertices];
+            int j = 0;
+            for (int i = 0; i < pl.NumberOfVertices; i++)
+            {
+                plIndexes[i] = startIndex;
+                if (startIndex <= pl.NumberOfVertices - 1)
+                    startIndex++;
+                else
+                {
+                    plIndexes[i] = 0 + j;
+                    j++;
+                }
+            }
+            return plIndexes;
         }
         /// <summary>
         /// Get the Middle point from this point to another point
@@ -73,6 +129,16 @@ namespace Nameless.Flareon.Controller
         public static Point3d MiddleTo(this Point3d pt0, Point3d ptf)
         {
             return new Point3d((pt0.X + ptf.X) / 2, (pt0.Y + ptf.Y) / 2, (pt0.Z + ptf.Z) / 2);
+        }
+        /// <summary>
+        /// Converts a Point 2d to a point 3d.
+        /// </summary>
+        /// <param name="pt">The point.</param>
+        /// <param name="z">The z default value.</param>
+        /// <returns>The point converted to a point 3d</returns>
+        public static Point3d ToPoint3d(this Point2d pt, Double z = 0)
+        {
+            return new Point3d(pt.X, pt.Y, z);
         }
     }
 }

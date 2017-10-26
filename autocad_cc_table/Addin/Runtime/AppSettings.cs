@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nameless.Flareon.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -33,6 +34,29 @@ namespace Nameless.Flareon.Runtime
             set
             {
                 this.SetValue(ATT_NUM_DEC, value.Value.ToString());
+            }
+        }
+        /// <summary>
+        /// Define el formato que utiliza la aplicación para mostrar los
+        /// datos del azimut
+        /// </summary>
+        /// <value>
+        /// El formato del Azimut.
+        /// </value>
+        public SexagesimalFormat AzimutFormat
+        {
+            get
+            {
+                var att = this.GetValue(ATT_AZI_FORMAT);
+                int val;
+                if (att != null && int.TryParse(att, out val))
+                    return (SexagesimalFormat)val;
+                else
+                    return SexagesimalFormat.NONE;
+            }
+            set
+            {
+                this.SetValue(ATT_NUM_DEC, ((int)value).ToString());
             }
         }
         /// <summary>

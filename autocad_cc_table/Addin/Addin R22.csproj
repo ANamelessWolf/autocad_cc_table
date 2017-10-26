@@ -78,6 +78,10 @@
     </Compile>
     <Compile Include="Controller\FormatUtils.cs" />
     <Compile Include="Controller\GeometryUtils.cs" />
+    <Compile Include="Model\Angle.cs" />
+    <Compile Include="Model\ConstructionRow.cs" />
+    <Compile Include="Model\PolylineConstructionTable.cs" />
+    <Compile Include="Model\SexagesimalFormat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
